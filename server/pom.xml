@@ -54,6 +54,15 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<distributionManagement>
+  <snapshotRepository>    
+    <id>deployment</id>
+    <name>snapshots</name>
+    <url>http://172.21.2.236:8081/repository/Eureka/</url>
+  </snapshotRepository>
+</distributionManagement> 
+
+
 	<build>
 		<plugins>
 			<plugin>
@@ -62,5 +71,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

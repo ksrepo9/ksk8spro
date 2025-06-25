@@ -61,6 +61,14 @@
 		</dependency>
 	</dependencies>
 
+		<distributionManagement>
+  <snapshotRepository>    
+    <id>deployment</id>
+    <name>snapshots</name>
+    <url>http://172.21.2.236:8081/repository/Service1/</url>
+  </snapshotRepository>
+</distributionManagement> 
+
 	<build>
 		<plugins>
 			<plugin>
