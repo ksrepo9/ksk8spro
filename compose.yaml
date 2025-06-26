@@ -7,10 +7,26 @@ services:
     ports:
       - "3306:3306"
 
+  server:
+    build: 
+      context: ./Docker/server
+    image : kartikeyasoft/ksserver
+    container_name: kseureka
+    ports:
+      - "8761:8761"
+
   service1:
-    build :
-      context: ./Docker/service1
+    build :  
+      context: ./Docker/service1    
     image : kartikeyasoft/ksservice1
     container_name: ksservice1
     ports:
       - "9001:9001"
+  
+  service2:
+    build :  
+      context: ./Docker/service2    
+    image : kartikeyasoft/ksservice2
+    container_name: ksservice2
+    ports:
+      - "9002:9002"
