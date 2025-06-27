@@ -17,8 +17,8 @@ pipeline {
         }
         stage('Build Images'){
             steps {
-               sh 'docker compose -f ${COMPOSE_FILE} build db'
-               sh 'docker compose -f ${COMPOSE_FILE} up -d db'
+               sh 'ls -l'
+              
             }
 
         }
