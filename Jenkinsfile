@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Build Images'){
             steps {
-               sh 'ls -l'
+               sh 'docker compose build db'
               
             }
 
