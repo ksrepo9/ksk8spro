@@ -14,7 +14,11 @@ pipeline {
              git branch: 'main', credentialsId: 'git', url: 'https://github.com/ksrepo9/ksk8spro.git'
 
             }
-
+        stage('Build Images')
+            steps {
+               sh 'docker compose build -f ${COMPOSE_FILE} db'
+               sh 'docker compose build -f ${COMPOSE_FILE} up -d db'
+            }
 
         }
     }
