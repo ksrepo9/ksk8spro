@@ -15,6 +15,22 @@ pipeline {
 
             }
         }
+
+         stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                        # Login without persisting credentials
+                        echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+                    '''
+                }
+            }
+        }       
+
         stage('Build Images'){
             steps {
               sh 'docker compose -f ${COMPOSE_FILE} build server' 
