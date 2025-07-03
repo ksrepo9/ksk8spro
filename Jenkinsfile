@@ -24,7 +24,7 @@ pipeline {
 
         }    
 
-    stage('Build DB'){
+    stage('Build Image'){
             steps {
                sh 'docker compose -f ${COMPOSE_FILE} build server'
                sh 'docker compose -f ${COMPOSE_FILE} build service1'
