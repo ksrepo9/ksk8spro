@@ -35,30 +35,12 @@ pipeline {
         }      
         stage('Start Containers'){
             steps {
-               sh 'docker compose -f ${COMPOSE_FILE} up -d'              
+               sh 'docker compose -f ${COMPOSE_FILE} down -d'              
               
             }
 
         }  
-         stage('Push to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub',
-                    usernameVariable: 'DOCKER_USER',
-                    passwordVariable: 'DOCKER_PASS'
-                )]) {
-                    sh '''
-                        # Login without persisting credentials
-                        echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-
-                        docker compose -f ${COMPOSE_FILE} push
-                       
-                        # Explicitly remove credentials
-                        rm -f ~/.docker/config.json 
-                    '''
-                }
-            }
-        }       
+       
 
        
     }
