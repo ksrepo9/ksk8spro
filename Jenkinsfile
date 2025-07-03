@@ -30,11 +30,15 @@ pipeline {
               sh 'docker compose -f ${COMPOSE_FILE} build service1' 
               sh 'docker compose -f ${COMPOSE_FILE} build service2'               
             }
-
         }  
+    stage('Docker App Container Start'){
+            steps {
+                sh 'docker compose -f ${COMPOSE_FILE} up -d' 
 
+            }
+    }
 
-         stage('Push to Docker Hub') {
+    stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'dockerhub',
