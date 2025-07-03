@@ -50,6 +50,11 @@ pipeline {
                     sh '''
                         # Login without persisting credentials
                         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+
+                        docker compose -f ${COMPOSE_FILE} push
+                       
+                        # Explicitly remove credentials
+                        rm -f ~/.docker/config.json 
                     '''
                 }
             }
