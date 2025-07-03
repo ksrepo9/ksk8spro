@@ -15,33 +15,28 @@ pipeline {
 
             }
         }
-    stage('Build DB'){
+    stage('Build Images'){
             steps {
-               sh 'docker compose -f ${COMPOSE_FILE} build db'
-               sh 'docker compose -f ${COMPOSE_FILE} up -d db'
+              sh 'docker compose -f ${COMPOSE_FILE} build server' 
               
             }
 
         }    
 
-    stage('Build Image'){
+         stage('Push to Docker Hub') {
             steps {
-               sh 'docker compose -f ${COMPOSE_FILE} build server'
-               sh 'docker compose -f ${COMPOSE_FILE} build service1'
-               sh 'docker compose -f ${COMPOSE_FILE} build service2'
-              
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                        # Login without persisting credentials
+                        echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+                    '''
+                }
             }
-
-        }      
-        stage('Start Containers'){
-            steps {
-               sh 'docker compose -f ${COMPOSE_FILE} down'              
-              
-            }
-
-        }  
-    
+        }       
 
        
     }
-}
