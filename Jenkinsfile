@@ -33,7 +33,13 @@ pipeline {
             }
 
         }      
+        stage('Start Containers'){
+            steps {
+               sh 'docker compose -f ${COMPOSE_FILE} up -d'              
+              
+            }
 
+        }  
          stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
