@@ -35,12 +35,12 @@ pipeline {
         }      
         stage('Start Containers'){
             steps {
-               sh 'docker compose -f ${COMPOSE_FILE} down -d'              
+               sh 'docker compose -f ${COMPOSE_FILE} down'              
               
             }
 
         }  
-       
+    
 
        
     }
