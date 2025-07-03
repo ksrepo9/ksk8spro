@@ -15,6 +15,13 @@ pipeline {
 
             }
         }
+    stage('Build Images'){
+            steps {
+              sh 'docker compose -f ${COMPOSE_FILE} build server' 
+              
+            }
+
+        }    
 
          stage('Push to Docker Hub') {
             steps {
@@ -31,12 +38,6 @@ pipeline {
             }
         }       
 
-        stage('Build Images'){
-            steps {
-              sh 'docker compose -f ${COMPOSE_FILE} build server' 
-              
-            }
-
-        }
+       
     }
 }
