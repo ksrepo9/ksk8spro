@@ -24,6 +24,16 @@ pipeline {
 
         }    
 
+    stage('Build DB'){
+            steps {
+               sh 'docker compose -f ${COMPOSE_FILE} build server'
+               sh 'docker compose -f ${COMPOSE_FILE} build service1'
+               sh 'docker compose -f ${COMPOSE_FILE} build service2'
+              
+            }
+
+        }      
+
          stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
